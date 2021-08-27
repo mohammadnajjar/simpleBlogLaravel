@@ -1,9 +1,9 @@
 @extends('app')
 @section('title')
-    Posts
+   Soft Posts
 @endsection
 @section('content')
-    @include('posts.errors')
+
     <table class="table" style="text-align: center">
         <thead>
         <tr>
@@ -14,22 +14,23 @@
         </tr>
         </thead>
         <tbody>
-        {{--        @foreach($posts as $post)--}}
-        @forelse($posts as $post)
+{{--        @foreach($posts as $post)--}}
+            @forelse($posts as $post)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$post->title}}</td>
                 <td>{{$post->body}}</td>
                 <td>
-                    <a href="{{route('posts.create')}}" class="btn btn-primary btn-s">Add</a>
-                    <a href="{{route('posts.edit',$post->id)}}" class="btn btn-warning btn-s">Edit</a>
-                    <a href="{{route('posts.indexsoft')}}" class="btn btn-info btn-s">Restore</a>
+                    <a href="{{route('posts.restore',$post->id)}}" class="btn btn-secondary btn-s">Restore</a>
+{{--                    <a href="{{route('posts.edit',$post->id)}}" class="btn btn-warning btn-s">Edit</a>--}}
 
-                    <form action="{{route('posts.destroy',$post->id)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Delete" class="btn btn-danger btn-s">
-                    </form>
+{{--                    <form action="{{route('posts.destroy',$post->id)}}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        @method('DELETE')--}}
+{{--                        <input type="submit" value="Delete" class="btn btn-danger btn-s">--}}
+{{--                    </form>--}}
+
+
                     <!-- Button trigger modal -->
                 {{--                <button type="button" class="btn btn-danger btn-s" data-toggle="modal" data-target="#exampleModal">--}}
                 {{--                    Delete--}}
@@ -55,15 +56,14 @@
                     {{--                        </div>--}}
                     {{--                    </div>--}}
                     {{--                </div>--}}
+
+
                 </td>
-                @empty
-                    <td colspan="3" style="text-align: center">NO Post</td>
-                    <td>
-                        <a href="{{route('posts.create')}}" class="btn btn-primary btn-s">Add</a>
-                        <a href="{{route('posts.indexsoft')}}" class="btn btn-info btn-s">Soft Deleted</a>
-                    </td>
-        @endforelse
-        {{--        @endforeach--}}
+            @empty
+                    <td colspan="4" style="text-align: center" class="alert alert-info mt-2">NO Post Deleted</td>
+
+            @endforelse
+{{--        @endforeach--}}
         </tbody>
     </table>
 @endsection

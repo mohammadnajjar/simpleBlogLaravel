@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+Route::get('/', [PostController::class,'index']);
+Route::get('indexsoft', [PostController::class,'indexsoft'])->name('posts.indexsoft');
+Route::get('restore/{id?}', [PostController::class,'restore'])->name('posts.restore');
 Route::resource('posts',PostController::class);
